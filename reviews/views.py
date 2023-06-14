@@ -1,12 +1,7 @@
+from django.http import HttpResponse
+from .models import Book
 from django.shortcuts import render
 
-def index(request):
-    return render(request, "base.html")
 
-def book_search(request):
-    search_text = request.GET.get("search", "")
-    return render(request, "search-results.html", {"search_text": search_text})
-
-def przywitanie(request):
-    imie = request.GET.get("imie", "")
-    return render(request,"name_print.html",{"imie": imie})
+def welcome_view(request):
+    return render(request, 'base.html')
