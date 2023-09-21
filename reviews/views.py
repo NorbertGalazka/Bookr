@@ -4,24 +4,32 @@ from .models import Book
 from .utils import avarage_rating
 
 
+def index(request):
+    return render(request, "C:\\Users\\Norbert\\PycharmProjects\\Bookr\\reviews\\templates\\base.html")
+
+
+def book_search(request):
+    search_text = request.GET.get("search", "")
+    return render(request, "C:\\Users\\Norbert\\PycharmProjects\\Bookr\\reviews\\templates\\search-results.html", {"search_text": search_text})
+
+
 def book_list(request):
     books = Book.objects.all()
-    books_list = []
+    books_with_reviews = []
     for book in books:
         reviews = book.review_set.all()
         if reviews:
-            avarege_rating = avarage_rating([review.rating for review in reviews])
-            num_of_reviews = len(reviews)
+            book_rating = avarage_rating([review.rating for review in reviews])
+            number_of_reviews = len(reviews)
         else:
-            avarege_rating = None
-            num_of_reviews = 0
+            book_rating = None
+            number_of_reviews = 0
+        books_with_reviews.append({"book": book, "book_rating": book_rating, "number_of_reviews": number_of_reviews})
 
-        dict = {'book_object': book, 'avarege_rating': avarege_rating, 'num_of_reviews': num_of_reviews}
-        books_list.append(dict)
-
-    dict_to_html = {'books': books_list}
-
-    return render(request, 'C:\\Users\\Norbert\\PycharmProjects\\Bookr\\reviews\\templates\\book_list.html', dict_to_html)
+    context = {
+        "book_list": books_with_reviews
+    }
+    return render(request, "C:\\Users\\Norbert\\PycharmProjects\\Bookr\\reviews\\templates\\book_list.html", context)
 
 
 def book_detail(request, pk):
@@ -29,12 +37,17 @@ def book_detail(request, pk):
     reviews = book.review_set.all()
     if reviews:
         book_rating = avarage_rating([review.rating for review in reviews])
-        context = {"book": book, "book_rating": book_rating, "reviews":reviews}
-
+        context = {
+            "book": book,
+            "book_rating": book_rating,
+            "reviews": reviews
+        }
     else:
-        context ={"book": book, "book_rating": None, "reviews":None}
-
+        context = {
+            "book": book,
+            "book_rating": None,
+            "reviews": None
+        }
     return render(request, "C:\\Users\\Norbert\\PycharmProjects\\Bookr\\reviews\\templates\\book_detail.html", context)
-
 
 
