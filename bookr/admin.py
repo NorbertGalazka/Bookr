@@ -1,6 +1,7 @@
 from django.contrib import admin
 
+
 class BookrAdminSite(admin.AdminSite):
-    title_header = 'Aplikacja administacyjna dla pedałów'
-    site_header = 'Aplikacja administacyjna dla pedałów'
-    index_title = 'Aplikacja administacyjna dla pedałów'
+    title_header = 'Aplikacja administacyjna 1 '
+    site_header = 'Aplikacja administacyjna 2'
+    index_title = 'Aplikacja administacyjna 3'
