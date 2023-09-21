@@ -1,5 +1,4 @@
 <!doctype html>
-{% load static %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -11,7 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>Book Review</title>
+    <title>Bookr</title>
     <style type="text/css">
       .navbar {
         min-height: 100px;
@@ -20,11 +19,15 @@
       .navbar-brand {
         font-size: 25px;
       }
+      .navbar-brand > img
+      {
+        height: 60px;
+      }
     </style>
   </head>
   <body>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
-          <a class="navbar-brand" href="/">Book Review</a>
+          <a class="navbar-brand" href="/">{% block brand %} Recenzje książek {% endblock %}</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -43,7 +46,7 @@
             </form>
           </div>
         </nav>
-         {% block content %}
+        {% block content %}
         <h1>Welcome to Bookr!</h1>
         {% endblock %}
   <!-- Copyright -->
